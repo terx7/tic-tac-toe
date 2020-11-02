@@ -27,6 +27,7 @@ const winningMessage = () => `Player ${currentPlayer} has won!`;
 
 function handlePlayerChange() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
+
 }
 
 function handleResultValidation() {
@@ -72,16 +73,25 @@ cellDivs.forEach(el => {
             gameState[cellValue] = currentPlayer;
             console.log(gameState)
 
-            if (currentPlayer == "O") {
-                for (let i = 0; i <= 7; i++) {
-                    if (gameBoard[selectedRow][selectedCol] == "-") {
-                        gameboard[Math.floor(Math.random() * 3)][Math.floor(Math.random() * 3)] = "O"
-                    }
-                }
-            }
-
 
             handleResultValidation()
         }
+        if (currentPlayer == "O") {
+
+            getEmptyCell()
+            console.log(getEmptyCell())
+            currentPlayer = "X"
+        }
+
     })
-});
+})
+
+function getEmptyCell() {
+    let x
+    let y
+    do {
+        x = Math.floor(Math.random() * 3)
+        y = Math.floor(Math.random() * 3)
+    } while (gameBoard[x][y] != "-")
+    return [x, y]
+}
